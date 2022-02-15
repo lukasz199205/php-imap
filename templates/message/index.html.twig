@@ -1,5 +1,14 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+{% endblock %}
+
 {% block title %}Wiadomości{% endblock %}
 
 {% block body %}
@@ -36,4 +45,23 @@
     </table>
     <div class="mb-5"></div>
 
+{% endblock %}
+{% block script %}
+    <script>
+        $(document).ready( function () {
+            $('#table').DataTable(
+                {   language: {
+                        url: 'https://cdn.datatables.net/plug-ins/1.11.4/i18n/pl.json'
+                    },
+                    columns: [
+                        null,
+                        null,
+                        null,
+                        null,
+                        { orderable: false },
+                    ]
+                }
+            );
+        } );
+    </script>
 {% endblock %}
