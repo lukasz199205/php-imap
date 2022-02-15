@@ -32,6 +32,10 @@ class MessageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($message);
             $entityManager->flush();
+            $this->addFlash(
+                'success',
+                'Wiadomość została dodana'
+            );
 
             return $this->redirectToRoute('message_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -58,6 +62,10 @@ class MessageController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+            $this->addFlash(
+                'success',
+                'Wiadomość została zaktualizowana.'
+            );
 
             return $this->redirectToRoute('message_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -75,7 +83,10 @@ class MessageController extends AbstractController
             $entityManager->remove($message);
             $entityManager->flush();
         }
-
+        $this->addFlash(
+            'danger',
+            'Wiadomość została usunięta.'
+        );
         return $this->redirectToRoute('message_index', [], Response::HTTP_SEE_OTHER);
     }
 }
