@@ -4,6 +4,10 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    imap_server_address: '{###/imap/ssl/novalidate-cert}INBOX' # adres serwera pocztowego
+    imap_user: '###'                                                # użytkownik serwera pocztowego
+    imap_password: '###'                                                # hasło do serwera pocztowego
+    sms_api_sender: '###>'                                       # nadawca od którego przekierowane są wiadomości an serwer pocztowy
 
 services:
     # default configuration for services in *this* file
@@ -22,3 +26,10 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Utils\FetchEmails:
+        arguments:
+            $imapServerAddress: '%imap_server_address%'
+            $imapUser: '%imap_user%'
+            $imapPassword: '%imap_password%'
+            $smsApiSender: '%sms_api_sender%'
