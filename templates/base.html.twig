@@ -18,6 +18,42 @@
         {% endblock %}
     </head>
     <body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{path('homepage')}}"><img src="https://ironteam.pl/wp-content/uploads/2019/12/LOGO-KOLOR-18-scaled-160x84.png"/></a>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{path('homepage')}}">Strona główna</a>
+                    </li>
+                    {% if app.user %}
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{path('message_index')}}">Wiadomości</a>
+                        </li>
+                    {% endif %}
+                </ul>
+                {% if app.user %}
+                    <a href="{{path('app_logout')}}" class="btn btn-outline-success mt-3 mb-3">WYLOGUJ</a>
+                {% else %}
+                    <a href="{{path('app_login')}}" class="btn btn-outline-success mt-3 mb-3">LOGOWANIE</a>
+                {% endif %}
+            </div>
+        </nav>
+
+        <div class="container mt-4 mb-4">
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }} text-center" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+
         {% block body %}{% endblock %}
+
+    </div>
+    {% block script %} {%endblock%}
     </body>
 </html>
+
