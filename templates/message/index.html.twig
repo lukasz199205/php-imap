@@ -1,19 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Message index{% endblock %}
+{% block title %}Wiadomości{% endblock %}
 
 {% block body %}
-    <h1>Message index</h1>
-
-    <table class="table">
+    <h1>Wiadomości</h1>
+    <a href="{{ path('message_new') }}" class="btn btn-primary mb-2">Dodaj wiadomość</a>
+    <table class="table table-striped table-hover align-middle" id="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Sender</th>
-                <th>Content</th>
-                <th>Date</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Nadawca</th>
+            <th>Treść</th>
+            <th>Data</th>
+            <th>Akcje</th>
+        </tr>
         </thead>
         <tbody>
         {% for message in messages %}
@@ -21,19 +21,19 @@
                 <td>{{ message.id }}</td>
                 <td>{{ message.sender }}</td>
                 <td>{{ message.content }}</td>
-                <td>{{ message.date ? message.date|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('message_show', {'id': message.id}) }}">show</a>
-                    <a href="{{ path('message_edit', {'id': message.id}) }}">edit</a>
+                <td style="width:100px;">{{ message.date ? message.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td style="width:150px;">
+                    <a href="{{ path('message_show', {'id': message.id}) }}" class="btn btn-primary">Pokaż</a>
+                    <a href="{{ path('message_edit', {'id': message.id}) }}" class="btn btn-warning">Edytuj</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">Brak wiadomości w bazie</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    <div class="mb-5"></div>
 
-    <a href="{{ path('message_new') }}">Create new</a>
 {% endblock %}

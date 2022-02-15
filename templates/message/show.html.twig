@@ -1,34 +1,34 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Message{% endblock %}
+{% block title %}Wiadomość{% endblock %}
 
 {% block body %}
-    <h1>Message</h1>
+    <h1>Wiadomość</h1>
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ message.id }}</td>
-            </tr>
-            <tr>
-                <th>Sender</th>
-                <td>{{ message.sender }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ message.content }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ message.date ? message.date|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ message.id }}</td>
+        </tr>
+        <tr>
+            <th>Nadawca</th>
+            <td>{{ message.sender }}</td>
+        </tr>
+        <tr>
+            <th>Treść</th>
+            <td>{{ message.content }}</td>
+        </tr>
+        <tr>
+            <th>Data</th>
+            <td>{{ message.date ? message.date|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('message_index') }}">back to list</a>
-
-    <a href="{{ path('message_edit', {'id': message.id}) }}">edit</a>
+    <a href="{{ path('message_index') }}" class="btn btn-primary">Cofnij</a>
+    <br />
+    <a href="{{ path('message_edit', {'id': message.id}) }}" class="btn btn-warning mt-3">Edytuj</a>
 
     {{ include('message/_delete_form.html.twig') }}
 {% endblock %}
