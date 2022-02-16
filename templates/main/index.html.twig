@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Strona główna{% endblock %}
+
+{% block body %}
+
+    <ul>
+        <li>
+            Aplikacja ma za zadanie pobierać wiadomości email, które na serwer pocztowy przekazywane są z SMSApi oraz parsować je i zapisywać lokalnie w bazie danych MySQL.
+        </li>
+        <li>
+            Wiadomości na serwerze pocztowym muszą być odpowiednio spreparowane, tzn. muszą zawierać w treści tekst taki jak: 'nadawca' oraz treść wiadomości musi zaczynać się od słowa 'iron' (wielkość liter nie ma znaczenia)
+        </li>
+        <li>
+            Aplikacja opakowana została w prosty system logowania, który zapobiega przed dostępem do danych przez nieautoryzowanych użytkowników.
+        </li>
+        <li>
+            Dane dostepu do serwera pocztowego (adres, użytkownik, hasło) można ustawić w aplikacji w pliku <i>config/services.yaml</i> <br />
+            <code> parameters: <br />
+                &emsp;&emsp;imap_server_address: '{imap.iq.pl:993/debug/imap/ssl/novalidate-cert}INBOX' # adres serwera pocztowego <br />
+                &emsp;&emsp;imap_user: 'sms@ironteam.pl'                                                # użytkownik serwera pocztowego <br />
+                &emsp;&emsp;imap_password: 'Remote#2018'                                                # hasło do serwera pocztowego <br />
+                &emsp;&emsp;sms_api_sender: 'noreply@smsapi.pl'                                       # nadawca od którego przekierowane są wiadomości an serwer pocztowy
+            </code>
+        </li>
+        <li>
+            Aplikacja automatycznie pobiera nowe wiadomości w 10 minutowym interwale (zadanie CRON)
+        </li>
+        <li>
+            Pobierane są tylko nowe wiadomości (te, które nie mają ustawionej flagi 'seen' na serwerze pocztowym).
+        </li>
+        <li>
+            W dowolnej chwili można wymusić pobranie nowych wiadomości za pomocą komendy <i>bin/console app:fetch-emails</i>.
+        </li>
+        <li>
+            Wszelkie wiadomości, które mają nieprawidłowy format lub pochodzą od innego nadawcy niż <email>noreply@smsapi.pl<email> są odnotowywane w bazie z treścią 'Problem z wiadomością, sprawdź serwer poczty'.
+        </li>
+        <li>
+            Dane dostępowe <br />
+            <strong>login:</strong> admin@ironteam.pl <br />
+            <strong>passwd:</strong> ironteam
+        </li>
+    </ul>
+{% endblock %}

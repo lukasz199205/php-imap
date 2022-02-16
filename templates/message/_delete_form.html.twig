@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('message_delete', {'id': message.id}) }}" onsubmit="return confirm('Czy na pewno chcesz usunąć?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ message.id) }}">
+    <button class="btn btn-danger mt-3">Usuń</button>
+</form>
